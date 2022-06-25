@@ -16,6 +16,8 @@ public class GuestGroupRegister {
         if(gateway.checkNameExists(name)) {
             throw new IllegalArgumentException("Guest group name already exists!");
         }
+
+        gateway.register(name);
     }
 
 }

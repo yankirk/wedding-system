@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -32,6 +33,19 @@ class GuestGroupRegisterTest {
         assertThatThrownBy(() -> sut.execute(name)).isInstanceOf(IllegalArgumentException.class);
 
         verify(gateway, times(1)).checkNameExists(anyString());
-        verify(gateway, never()).persist(anyString());
+        verify(gateway, never()).register(anyString());
+    }
+
+    @Test
+    @DisplayName("When registered then don`t throw an exception")
+    void whenRegistered() {
+
+        var name = "any_guest_group_name";
+        when(gateway.checkNameExists(anyString())).thenReturn(false);
+
+        assertThatCode(() -> sut.execute(name)).doesNotThrowAnyException();
+
+        verify(gateway, times(1)).checkNameExists(anyString());
+        verify(gateway, times(1)).register(anyString());
     }
 }
