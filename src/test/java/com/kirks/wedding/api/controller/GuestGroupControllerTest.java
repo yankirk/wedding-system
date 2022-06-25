@@ -19,7 +19,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest(classes = GuestGroupController.class)
-@DisplayName("Test Guest Group Api Controller")
+@DisplayName("Test: Guest Group Api Controller")
 public class GuestGroupControllerTest {
 
     @Autowired GuestGroupController sut;
