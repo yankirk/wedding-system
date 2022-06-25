@@ -2,6 +2,7 @@ package com.kirks.wedding.infra.gateway;
 
 import com.kirks.wedding.infra.repository.GuestGroupRepository;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,15 +19,33 @@ class GuestGroupGatewayImpTest {
     @Autowired GuestGroupGatewayImp sut;
     @MockBean GuestGroupRepository repository;
 
-    @Test
-    @DisplayName("When name exists then return true")
-    void whenNameExists() {
+    @Nested
+    @DisplayName("Test: Check Name Exists Feature")
+    class CheckNameExistsTest {
 
-        var name = "existing_name";
-        when(repository.existsByName(anyString())).thenReturn(true);
+        @Test
+        @DisplayName("When name exists then return true")
+        void whenNameExists() {
 
-        var result = sut.checkNameExists(name);
+            var name = "existing_name";
+            when(repository.existsByName(anyString())).thenReturn(true);
 
-        assertThat(result).isTrue();
+            var result = sut.checkNameExists(name);
+
+            assertThat(result).isTrue();
+        }
+
+        @Test
+        @DisplayName("When name not exist then return false")
+        void whenNameNotExist() {
+
+            var name = "any_new_name";
+            when(repository.existsByName(anyString())).thenReturn(false);
+
+            var result = sut.checkNameExists(name);
+
+            assertThat(result).isFalse();
+        }
+
     }
 }
