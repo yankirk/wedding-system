@@ -14,7 +14,7 @@ public class GuestGroupRegister {
 
     public void execute(final String name) {
         if(gateway.checkNameExists(name)) {
-            throw new IllegalArgumentException("Guest group name already exists!");
+            throw new IllegalArgumentException("Person group name already exists!");
         }
 
         gateway.register(name);

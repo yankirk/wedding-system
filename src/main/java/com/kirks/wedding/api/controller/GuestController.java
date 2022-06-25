@@ -2,6 +2,7 @@ package com.kirks.wedding.api.controller;
 
 import com.kirks.wedding.api.request.GuestRequest;
 import com.kirks.wedding.core.usecase.GuestRegister;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +19,9 @@ public class GuestController {
         this.guestRegister = guestRegister;
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addGuest(@RequestBody GuestRequest requestBody) {
-        guestRegister.execute(requestBody.toGuest());
+        guestRegister.execute(requestBody.toGuest(), requestBody.groupId());
         return ResponseEntity.ok().build();
     }
 }

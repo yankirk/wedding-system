@@ -1,7 +1,7 @@
 package com.kirks.wedding.api.controller;
 
 import com.kirks.wedding.api.request.GuestRequest;
-import com.kirks.wedding.core.domain.Guest;
+import com.kirks.wedding.core.domain.Person;
 import com.kirks.wedding.core.usecase.GuestRegister;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -16,11 +16,12 @@ import org.springframework.http.HttpStatus;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @SpringBootTest(classes = GuestController.class)
-@DisplayName("Test: Guest Api Controller")
+@DisplayName("Test: Person Api Controller")
 class GuestControllerTest {
 
     @Autowired GuestController sut;
@@ -32,7 +33,7 @@ class GuestControllerTest {
     }
 
     @Nested
-    @DisplayName("Test: Add Guest Feature")
+    @DisplayName("Test: Add Person Feature")
     class AddGuestTest {
 
         @Test
@@ -49,7 +50,7 @@ class GuestControllerTest {
             .then()
                 .status(HttpStatus.OK);
 
-            verify(guestRegister, times(1)).execute(any(Guest.class));
+            verify(guestRegister, times(1)).execute(any(Person.class), anyString());
         }
     }
 }

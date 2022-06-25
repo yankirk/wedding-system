@@ -1,5 +1,5 @@
 package com.kirks.wedding.core.domain;
 
-public record Guest() {
+public record Person(String name) {
 
 }

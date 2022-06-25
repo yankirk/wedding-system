@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Test: Guest Group Infra Mapper")
+@DisplayName("Test: Person Group Infra Mapper")
 class GuestGroupMapperTest {
 
     @Test

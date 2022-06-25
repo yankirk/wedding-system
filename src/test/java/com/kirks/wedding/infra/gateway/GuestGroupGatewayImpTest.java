@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = GuestGroupGatewayImp.class)
-@DisplayName("Test: Guest Group Infra Gateway")
+@DisplayName("Test: Person Group Infra Gateway")
 class GuestGroupGatewayImpTest {
 
     @Autowired GuestGroupGatewayImp sut;

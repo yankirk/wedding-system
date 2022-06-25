@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = GuestGroupRegister.class)
-@DisplayName("Test: Guest Group Register Core Use Case")
+@DisplayName("Test: Person Group Register Core Use Case")
 class GuestGroupRegisterTest {
 
     @Autowired GuestGroupRegister sut;
