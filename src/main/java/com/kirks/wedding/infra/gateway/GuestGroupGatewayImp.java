@@ -32,4 +32,9 @@ public class GuestGroupGatewayImp implements GuestGroupGateway {
         return Optional.empty();
     }
 
+    @Override
+    public void update(final GuestGroup group) {
+        // TODO document why this method is empty
+    }
+
 }

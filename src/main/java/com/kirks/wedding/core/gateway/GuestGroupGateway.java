@@ -12,4 +12,6 @@ public interface GuestGroupGateway {
 
     Optional<GuestGroup> load(String id);
 
+    void update(GuestGroup group);
+
 }

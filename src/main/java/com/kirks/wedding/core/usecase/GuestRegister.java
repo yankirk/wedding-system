@@ -14,7 +14,10 @@ public class GuestRegister {
     }
 
     public void execute(final Person person, final String groupId) {
-       groupGateway.load(groupId).orElseThrow(() -> new IllegalArgumentException("Guest group not found!"));
+       var group = groupGateway.load(groupId)
+           .orElseThrow(() -> new IllegalArgumentException("Guest group not found!"));
+       group.addGuest(person);
+       groupGateway.update(group);
     }
 
 }
