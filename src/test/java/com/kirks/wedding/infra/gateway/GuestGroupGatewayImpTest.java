@@ -1,5 +1,6 @@
 package com.kirks.wedding.infra.gateway;
 
+import com.kirks.wedding.infra.entity.GuestGroupEntity;
 import com.kirks.wedding.infra.repository.GuestGroupRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,7 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(classes = GuestGroupGatewayImp.class)
@@ -47,5 +52,21 @@ class GuestGroupGatewayImpTest {
             assertThat(result).isFalse();
         }
 
+    }
+
+    @Nested
+    @DisplayName("Test: Register Feature")
+    class RegisterTest {
+
+        @Test
+        @DisplayName("When registered then don`t throw an exception")
+        void whenRegistered() {
+
+            var name = "any_new_name";
+
+            assertThatCode(() -> sut.register(name)).doesNotThrowAnyException();
+
+            verify(repository, times(1)).save(any(GuestGroupEntity.class));
+        }
     }
 }
