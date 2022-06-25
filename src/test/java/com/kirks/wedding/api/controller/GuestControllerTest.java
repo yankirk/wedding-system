@@ -1,7 +1,8 @@
 package com.kirks.wedding.api.controller;
 
-import com.kirks.wedding.api.request.GuestGroupRequest;
-import com.kirks.wedding.core.usecase.GuestGroupRegister;
+import com.kirks.wedding.api.request.GuestRequest;
+import com.kirks.wedding.core.domain.Guest;
+import com.kirks.wedding.core.usecase.GuestRegister;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,16 +15,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-@SpringBootTest(classes = GuestGroupController.class)
-@DisplayName("Test: Guest Group Api Controller")
-class GuestGroupControllerTest {
+@SpringBootTest(classes = GuestController.class)
+@DisplayName("Test: Guest Api Controller")
+class GuestControllerTest {
 
-    @Autowired GuestGroupController sut;
-    @MockBean GuestGroupRegister guestGroupRegister;
+    @Autowired GuestController sut;
+    @MockBean GuestRegister guestRegister;
 
     @BeforeEach
     void init() {
@@ -31,24 +32,24 @@ class GuestGroupControllerTest {
     }
 
     @Nested
-    @DisplayName("Test Create Group Feature")
-    class CreateGroupTest {
+    @DisplayName("Test: Add Guest Feature")
+    class AddGuestTest {
 
         @Test
-        @DisplayName("When the group was created then return http status ok")
-        void whenGroupCreated() {
+        @DisplayName("When guest was added then return http status ok")
+        void whenGuestAdded() {
 
-            var requestBody = new GuestGroupRequest("Friends");
+            var requestBody = new GuestRequest("any_guest_name", "group_id");
 
             given()
                 .contentType(ContentType.JSON)
                 .body(requestBody)
             .when()
-                .post("/guests/groups")
+                .post("/guests")
             .then()
                 .status(HttpStatus.OK);
 
-            verify(guestGroupRegister, times(1)).execute(anyString());
+            verify(guestRegister, times(1)).execute(any(Guest.class));
         }
     }
 }

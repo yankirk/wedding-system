@@ -1,1 +1,9 @@
+server:
+  port: 3094
 
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: wedding-system
