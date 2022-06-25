@@ -1,7 +1,7 @@
 package com.kirks.wedding.infra.gateway;
 
 import com.kirks.wedding.core.gateway.GuestGroupGateway;
-import com.kirks.wedding.infra.entity.GuestGroupEntity;
+import com.kirks.wedding.infra.common.mapper.GuestGroupMapper;
 import com.kirks.wedding.infra.repository.GuestGroupRepository;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class GuestGroupGatewayImp implements GuestGroupGateway {
 
     @Override
     public void register(final String name) {
-        repository.save(new GuestGroupEntity(name));
+        repository.save(GuestGroupMapper.mapToEntity(name));
     }
 
 }
